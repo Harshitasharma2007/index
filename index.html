@@ -9,6 +9,7 @@
 
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <style>
@@ -328,38 +329,12 @@ Apart from academics, I enjoy drawing , dancing and listening songs, which allow
 </footer>
 
 <script>
-document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+/* 🔗 SUPABASE CONFIG */
+const supabaseUrl = "https://lgpkoodkqothjdbxjoto.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxncGtvb2RrcW90aGpkYnhqb3RvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NjExMDAsImV4cCI6MjA4NzQzNzEwMH0.CBI5NqYIqje4bG0HyIV9NpavihqvYb-bJt4c9tSjjBs";
 
-e.preventDefault();
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-const name = document.getElementById("name").value;
-const email = document.getElementById("email").value;
-const message = document.getElementById("message").value;
-
-const status = document.getElementById("status");
-
-const res = await fetch("/api/feedback", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify({
-name,
-email,
-message
-})
-});
-
-const data = await res.json();
-
-if (data.success) {
-status.innerText = "✅ Feedback sent!";
-document.getElementById("feedbackForm").reset();
-} else {
-status.innerText = "❌ Error sending feedback";
-}
-
-});
 /* 📨 FEEDBACK SUBMIT */
 document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
 e.preventDefault();
